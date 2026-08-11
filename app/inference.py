@@ -27,14 +27,18 @@ def load_metadata():
     except Exception as e:
         raise RuntimeError(f"Could not load metadata files: {e}")
 
+startup_error = None
+
 def load_model():
-    global model
+    global model, startup_error
     try:
         if os.path.exists(MODEL_PATH):
             model = tf.keras.models.load_model(MODEL_PATH, compile=False)
         else:
-            print(f"Warning: Model not found at {MODEL_PATH}")
+            startup_error = f"Model not found at {MODEL_PATH}"
+            print(f"Warning: {startup_error}")
     except Exception as e:
+        startup_error = str(e)
         raise RuntimeError(f"Could not load model: {e}")
 
 def get_model_info():

@@ -13,7 +13,8 @@ def health_check():
     model_loaded = inference.model is not None
     return {
         "status": "ok",
-        "model_loaded": model_loaded
+        "model_loaded": model_loaded,
+        "startup_error": inference.startup_error
     }
 
 @router.get("/model/info", response_model=ModelInfo)
