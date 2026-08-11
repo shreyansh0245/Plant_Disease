@@ -1,3 +1,6 @@
+import os
+os.environ["TF_USE_LEGACY_KERAS"] = "1"
+
 import json
 import numpy as np
 from PIL import Image
@@ -31,7 +34,7 @@ def load_model():
     global model
     try:
         if os.path.exists(MODEL_PATH):
-            model = tf.keras.models.load_model(MODEL_PATH)
+            model = tf.keras.models.load_model(MODEL_PATH, compile=False)
         else:
             print(f"Warning: Model not found at {MODEL_PATH}")
     except Exception as e:
