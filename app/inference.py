@@ -44,21 +44,31 @@ def get_model_info():
     num_classes = model_config.get("num_classes", len(labels))
     image_size = model_config.get("image_size", 224)
     
+    if isinstance(image_size, list):
+        input_size = image_size
+    else:
+        input_size = [image_size, image_size]
+    
     classes_list = [labels.get(i, f"Class {i}") for i in range(num_classes)]
     
     return {
         "model_name": model_config.get("model_name", "MobileNetV2"),
         "model_version": model_config.get("model_version", "1.0"),
-        "input_size": [image_size, image_size],
+        "input_size": input_size,
         "num_classes": num_classes,
         "classes": classes_list
     }
 
 def preprocess_image(image_bytes: bytes):
     image_size = model_config.get("image_size", 224)
+    if isinstance(image_size, list):
+        target_size = (image_size[0], image_size[1])
+    else:
+        target_size = (image_size, image_size)
+        
     try:
         image = Image.open(BytesIO(image_bytes)).convert("RGB")
-        image = image.resize((image_size, image_size))
+        image = image.resize(target_size)
         img_array = np.array(image, dtype=np.float32)
         img_array = preprocess_input(img_array)
         img_array = np.expand_dims(img_array, axis=0)
