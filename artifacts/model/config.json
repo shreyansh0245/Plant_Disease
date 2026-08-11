@@ -1,0 +1,20 @@
+{
+    "model_name": "MobileNetV2",
+    "model_version": "1.0",
+    "image_size": [
+        224,
+        224
+    ],
+    "num_classes": 8,
+    "preprocessing": "MobileNetV2 preprocess_input",
+    "classes": [
+        "Tomato_Bacterial_spot",
+        "Tomato_Early_blight",
+        "Tomato_Late_blight",
+        "Tomato_Leaf_Mold",
+        "Tomato_Septoria_leaf_spot",
+        "Tomato_Spider_mites_Two_spotted_spider_mite",
+        "Tomato__Target_Spot",
+        "Tomato_healthy"
+    ]
+}
