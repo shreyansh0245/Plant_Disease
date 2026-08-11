@@ -33,7 +33,7 @@ def load_model():
     global model, startup_error
     try:
         if os.path.exists(MODEL_PATH):
-            model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+            model = tf.keras.models.load_model(MODEL_PATH, compile=False, safe_mode=False)
         else:
             startup_error = f"Model not found at {MODEL_PATH}"
             print(f"Warning: {startup_error}")
