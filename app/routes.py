@@ -4,6 +4,10 @@ import app.inference as inference
 
 router = APIRouter()
 
+@router.get("/")
+def read_root():
+    return {"message": "Plant Disease Detection API is running. Go to /docs for the interactive API documentation."}
+
 @router.get("/health")
 def health_check():
     model_loaded = inference.model is not None
